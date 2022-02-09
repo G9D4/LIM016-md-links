@@ -1,0 +1,23 @@
+/^(.+)\\([^\/]+)$                   regex para path absoluto
+
+/\\/g                               regex para detectar \
+
+.replace(/\\/g , "/");
+
+Rutas de prueba
+
+C:\Users\gabri\Desktop\laboratoria-md-links\LIM016-md-links\pruebas\prueba2.md
+
+pruebas\prueba2.md
+
+C:\Users\gabri\Desktop\laboratoria-md-links\LIM016-md-links\prueba1.md
+
+prueba1.md
+
+C:\Users\gabri\Desktop\laboratoria-md-links\LIM016-md-links\src
+
+src
+
+C:\Users\gabri\Desktop\laboratoria-md-links\LIM016-md-links\src\commands
+
+src\commands
