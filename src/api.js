@@ -2,12 +2,14 @@ const path = require ('path')
 const fs = require ('fs')
 
 const regxSlash = /\\/g
-const op1 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/src/commands'
+const op1 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/src'
 const op2 = 'src/commands'
 const op3 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/prueba2.md'
 const op4 = 'pruebas/prueba2.md'
 const op5 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/src/cli.js'
 const op6 = 'src/cli.js'
+const op7 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebasss'
+// const op8 = 
 
 
 //Le damos formato a la ruta
@@ -44,3 +46,13 @@ const isDirectory = (filePath) => {
 const isMdFile = (filePath) => {
     return path.extname(filePath) === ".md"
 }
+
+//Verificamos el contenido del directorio
+const directoryContent = (dirPath) => {
+    if(fs.readdirSync(dirPath).length === 0){
+        console.log('Directorio vacio')
+    }else{
+        return true
+    }
+}
+
