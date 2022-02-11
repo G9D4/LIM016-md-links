@@ -1,7 +1,9 @@
 const path = require ('path')
 const fs = require ('fs')
 
-const regxSlash = /\\/g
+const regxBackSlash = /\\/g
+// const regxLinkNotation = 
+
 const op1 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/src'
 const op2 = 'src/commands'
 const op3 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/prueba2.md'
@@ -9,7 +11,7 @@ const op4 = 'pruebas/prueba2.md'
 const op5 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/src/cli.js'
 const op6 = 'src/cli.js'
 const op7 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebasss'
-// const op8 = 
+
 
 
 //Le damos formato a la ruta
@@ -29,12 +31,9 @@ const toAbsolute = (enteredPath) => {
 }
 
 //Verificamos si la ruta existe 
-//(de ser true, deberia retornar la ruta?)(por que cuando no existe da undefined al final?)
+//(por que cuando no existe da undefined al final?)
 const isRealPath = (enteredPath) => {
-    if(fs.existsSync(enteredPath) === true){
-        return enteredPath
-    }
-    return console.log("La ruta no existe")
+    return fs.existsSync(enteredPath)
 }
 
 //Verificamos si es un file .md
@@ -49,21 +48,39 @@ const isDirectory = (enteredPath) => {
 
 //Verificamos el contenido del directorio
 const directoryContent = (dirPath) => {
-    if(fs.readdirSync(dirPath).length === 0){
-        return false
-    }else{
-        return true
-    }
+    // if(fs.readdirSync(dirPath).length === 0){
+    //     return false
+    // }else{
+    //     return true
+    // }
+    return fs.readdirSync(dirPath)
 }
 
-//Recopilamos los archivos del directorio (cambiar instruccion)
-// const getFiles = (enteredPath) => {
-//     let fileArray=[]
-//     if(isDirectory(enteredPath) === false && isMdFile(enteredPath === true)){
-//         getFiles.push(enteredPath)
-//     }else{
-//         if(isDirectory(enteredPath) ===  true){
-//             directoryContent(enteredPath)
-//         }
-//     }
-// }
+//Recopilamos los archivos .md, si el path es de un directorio, lo exploramos aplicando recursividad
+const getMdFiles = (enteredPath) => {
+    let fileArray=[]
+
+    const recursiveSearch = (enteredPath) => {
+        if(!isDirectory(enteredPath)){
+            if(isMdFile(enteredPath)){
+                fileArray.push(enteredPath)
+            }
+        }else{
+            let filesList = directoryContent(enteredPath)
+            let absolutePathsList = filesList.map((file) => path.join(enteredPath, file))
+            absolutePathsList.forEach((path) => {
+                recursiveSearch(path)                
+            });
+        }
+    }
+    recursiveSearch(enteredPath)
+    return fileArray
+}
+
+// console.log(getMdFiles('C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links'))
+
+//Verificar y recopilar links si los hay
+
+const getLinks = (mdfileArray) => {
+
+}
