@@ -1,8 +1,11 @@
 const path = require ('path')
 const fs = require ('fs')
 
-const regxBackSlash = /\\/g
-// const regxLinkNotation = 
+const regexBackSlash = /\\/g
+const regexLinkNotation = /^\[([\w\s\d]+)\]\((https?:\/\/[\w\d.\/?=#]+)\)$/gm
+const regexUrl = /\(https?:\/\/[\w\d.\/?=#]+\)/gm
+const regexText = /\[[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?\s]*\]/gm
+
 
 const op1 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/src'
 const op2 = 'src/commands'
@@ -56,6 +59,12 @@ const directoryContent = (dirPath) => {
     return fs.readdirSync(dirPath)
 }
 
+//Verificamos el contenido del file
+
+const fileContent = (filePath) => {
+    return fs.readFileSync(filePath, 'utf-8')
+}
+
 //Recopilamos los archivos .md, si el path es de un directorio, lo exploramos aplicando recursividad
 const getMdFiles = (enteredPath) => {
     let fileArray=[]
@@ -77,10 +86,31 @@ const getMdFiles = (enteredPath) => {
     return fileArray
 }
 
-// console.log(getMdFiles('C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links'))
-
 //Verificar y recopilar links si los hay
+const getLinks = (filePath) => {
+    const linksArray = fileContent(filePath).match(regexLinkNotation)
 
-const getLinks = (mdfileArray) => {
-
+    if(linksArray === null){
+        return false
+    }
+    return [linksArray, filePath]
 }
+
+//Validate false
+
+const validateFalse = (linksArray, filePath) => {
+    return linksArray.map((mdLink) => {
+        const href = mdLink.match(regexUrl).join().slice(1, -1)
+        const text = mdLink.match(regexText).join().slice(1, -1)
+        return {
+            href: href,
+            text: text,
+            file: filePath
+        }
+    })
+}
+
+const papa = getLinks(op3)
+const perro = validateFalse(papa)
+
+console.log(perro)
