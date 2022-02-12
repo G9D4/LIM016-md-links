@@ -21,3 +21,23 @@ src
 C:\Users\gabri\Desktop\laboratoria-md-links\LIM016-md-links\src\commands
 
 src\commands
+
+
+
+
+
+//Verificar y recopilar links si los hay
+const getLinksAndInfo = (filePath) => {
+    const linksArray = fileContent(filePath).match(regexLinkNotation)
+    // console.log(linksArray)
+
+    return linksArray.map((mdLink) => {
+        const href = mdLink.match(regexUrl).join().slice(1, -1)
+        const text = mdLink.match(regexText).join().slice(1, -1)
+        return {
+            href: href,
+            text: text,
+            file: filePath
+        }
+    })
+}

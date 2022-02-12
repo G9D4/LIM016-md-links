@@ -1,5 +1,6 @@
 const path = require ('path')
 const fs = require ('fs')
+const axios = require ('axios')
 
 const regexBackSlash = /\\/g
 const regexLinkNotation = /^\[([\w\s\d]+)\]\((https?:\/\/[\w\d.\/?=#]+)\)$/gm
@@ -86,31 +87,47 @@ const getMdFiles = (enteredPath) => {
     return fileArray
 }
 
-//Verificar y recopilar links si los hay
+//Recopilar links si los hay
 const getLinks = (filePath) => {
     const linksArray = fileContent(filePath).match(regexLinkNotation)
 
     if(linksArray === null){
         return false
     }
-    return [linksArray, filePath]
+    return linksArray
 }
 
 //Validate false
-
-const validateFalse = (linksArray, filePath) => {
-    return linksArray.map((mdLink) => {
+const validateFalse = (links, path) => { 
+    return links.map((mdLink) => {
         const href = mdLink.match(regexUrl).join().slice(1, -1)
         const text = mdLink.match(regexText).join().slice(1, -1)
         return {
             href: href,
             text: text,
-            file: filePath
+            file: path
         }
     })
 }
 
-const papa = getLinks(op3)
-const perro = validateFalse(papa)
+//Validate true
+const validateTrue = (links, path) => {
+    const basicInfo = validateFalse(links, path)
+    return Promise.all(basicInfo.map(link) => {
+        const statusPromise = axios.get(link.href)
+        .then((result) => {
+            href: result.href;
+            text: result.text;
+            file: result.file,
+            status: result.status,
+            if(status)
+        })
+    })
+    // return basicInfo.map((e) => {
+    //     return e.href
+    // })
+    
+}
 
-console.log(perro)
+// const papa = getLinks(op3)
+// console.log(validateTrue(papa, op3))
