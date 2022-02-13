@@ -125,4 +125,4 @@ module.exports = {
     validateFalse
 }
 
-console.log(getLinks(op3))
+console.log(getMdFiles('C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/rara'))
