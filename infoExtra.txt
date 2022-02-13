@@ -41,3 +41,30 @@ const getLinksAndInfo = (filePath) => {
         }
     })
 }
+
+
+
+
+const validateTrue = (links, path) => {
+    const basicInfoArray = validateFalse(links, path)
+    return Promise.allSettled(basicInfoArray.map(link => {
+        const request = axios.get(link.href)
+            .then((res) => ({
+                href: link.href,
+                text: link.text,
+                file: link.file,
+                status: res.status,
+                ok: res.status>=200 && res.status<300? "OK" : "FAIL"
+            }))
+            .catch(() => ({
+                href: link.href,
+                text: link.text,
+                file: link.file,
+                status: "Failed request",
+                ok: "Unknown"
+                
+            }))
+        return request
+    }))
+    .then(res => res)    
+}

@@ -110,24 +110,45 @@ const validateFalse = (links, path) => {
     })
 }
 
-//Validate true
-const validateTrue = (links, path) => {
-    const basicInfo = validateFalse(links, path)
-    return Promise.all(basicInfo.map(link) => {
-        const statusPromise = axios.get(link.href)
-        .then((result) => {
-            href: result.href;
-            text: result.text;
-            file: result.file,
-            status: result.status,
-            if(status)
-        })
-    })
-    // return basicInfo.map((e) => {
-    //     return e.href
-    // })
-    
+module.exports = {
+    isAbsolute,
+    toAbsolute,
+    isRealPath,
+    isMdFile,
+    isDirectory,
+    directoryContent,
+    fileContent,
+    getMdFiles,
+    getLinks,
+    validateFalse
 }
 
-// const papa = getLinks(op3)
-// console.log(validateTrue(papa, op3))
+//Validate true
+const validateTrue = (links, path) => {
+    const basicInfoArray = validateFalse(links, path)
+    // console.log(basicInfoArray)
+    const httpRequest = basicInfoArray.map((link) => {
+        // console.log(link.href)
+        const axiosSearch = axios.get(link.href)
+        .then((res) => {
+            return {
+            href: link.href,
+            text: link.text,
+            file: link.file,
+            status: res.status,
+            ok: res.status>=200 && res.status<300? "OK" : "FAIL" 
+        }})
+        .catch(() => {
+            return {
+            href: link.href,
+            text: link.text,
+            file: link.file,
+            status: "Failed request",
+            ok: "Unknown"
+        }})
+        // console.log(axiosSearch)
+        return axiosSearch
+    })
+    return Promise.allSettled(httpRequest)
+    // .then(res => console.log(res))
+}
