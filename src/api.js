@@ -110,6 +110,8 @@ const validateFalse = (links, path) => {
     })
 }
 
+
+
 module.exports = {
     isAbsolute,
     toAbsolute,
@@ -123,32 +125,4 @@ module.exports = {
     validateFalse
 }
 
-//Validate true
-const validateTrue = (links, path) => {
-    const basicInfoArray = validateFalse(links, path)
-    // console.log(basicInfoArray)
-    const httpRequest = basicInfoArray.map((link) => {
-        // console.log(link.href)
-        const axiosSearch = axios.get(link.href)
-        .then((res) => {
-            return {
-            href: link.href,
-            text: link.text,
-            file: link.file,
-            status: res.status,
-            ok: res.status>=200 && res.status<300? "OK" : "FAIL" 
-        }})
-        .catch(() => {
-            return {
-            href: link.href,
-            text: link.text,
-            file: link.file,
-            status: "Failed request",
-            ok: "Unknown"
-        }})
-        // console.log(axiosSearch)
-        return axiosSearch
-    })
-    return Promise.allSettled(httpRequest)
-    // .then(res => console.log(res))
-}
+console.log(getLinks(op3))

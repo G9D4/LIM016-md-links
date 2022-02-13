@@ -26,3 +26,7 @@ const validateTrue = (links, path) => {
     return Promise.allSettled(httpRequest)
     // .then(res => console.log(res))
 }
+
+module.exports = {
+    validateTrue
+}
