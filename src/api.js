@@ -1,6 +1,5 @@
 const path = require ('path')
 const fs = require ('fs')
-const axios = require ('axios')
 
 const regexBackSlash = /\\/g
 const regexLinkNotation = /^\[([\w\s\d]+)\]\((https?:\/\/[\w\d.\/?=#]+)\)$/gm
@@ -125,4 +124,4 @@ module.exports = {
     validateFalse
 }
 
-console.log(getMdFiles('C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/rara'))
+// console.log(getMdFiles('C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/rara'))

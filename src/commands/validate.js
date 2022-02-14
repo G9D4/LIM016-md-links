@@ -1,8 +1,7 @@
-const basicFunctions = require ('../api')
+const axios = require ('axios')
 
 //Validate true
-const validateTrue = (links, path) => {
-    const basicInfoArray = validateFalse(links, path)
+const validateTrue = (basicInfoArray) => {
     const httpRequest = basicInfoArray.map((link) => {
         const axiosSearch = axios.get(link.href)
         .then((res) => {
@@ -24,7 +23,7 @@ const validateTrue = (links, path) => {
         return axiosSearch
     })
     return Promise.allSettled(httpRequest)
-    // .then(res => console.log(res))
+    .then(res => res)
 }
 
 module.exports = {
