@@ -7,14 +7,12 @@ const regexUrl = /\(https?:\/\/[\w\d.\/?=#]+\)/gm
 const regexText = /\[[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?\s]*\]/gm
 
 
-const op1 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/src'
-const op2 = 'src/commands'
-const op3 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/prueba2.md'
-const op4 = 'pruebas/prueba2.md'
-const op5 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/src/cli.js'
-const op6 = 'src/cli.js'
-const op7 = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebasss'
-
+const fakePath = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/pruebitas'
+const emptyFolder = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/vacio'
+const txtFile = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/archivo-no-md/prueba.txt'
+const mdNoLinks = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/md-sin-links/prueba.md'
+const mdWithLinks = 'C:Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/md-con-links/prueba.md'
+const recursiveSearch = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/prueba-recursiva'
 
 
 //Le damos formato a la ruta
