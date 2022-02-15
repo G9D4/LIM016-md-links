@@ -11,7 +11,7 @@ const fakePath = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pr
 const emptyFolder = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/vacio'
 const txtFile = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/archivo-no-md/prueba.txt'
 const mdNoLinks = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/md-sin-links/prueba.md'
-const mdWithLinks = 'C:Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/md-con-links/prueba.md'
+const mdWithLinks = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/md-con-links/prueba.md'
 const recursiveSearch = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/prueba-recursiva'
 
 
@@ -107,7 +107,30 @@ const validateFalse = (links, path) => {
     })
 }
 
+// const axios = require ('axios')
 
+// //Validate true
+// const validateTrue = (basicInfoArray) => {
+//     const httpRequest = basicInfoArray.map((link) => axios.get(link.href)
+//         .then((res) => {
+//             return {
+//             href: link.href,
+//             text: link.text,
+//             file: link.file,
+//             status: res.status,
+//             ok: res.status>=200 && res.status<300? "OK" : "FAIL" 
+//         }})
+//         .catch(() => {
+//             return {
+//             href: link.href,
+//             text: link.text,
+//             file: link.file,
+//             status: "Failed request",
+//             ok: "Unknown"
+//         }})
+//     )
+//     return Promise.allSettled(httpRequest)
+// }
 
 module.exports = {
     isAbsolute,
@@ -122,4 +145,7 @@ module.exports = {
     validateFalse
 }
 
-// console.log(getMdFiles('C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/rara'))
+// let a = getLinks(mdWithLinks)
+// let b = validateFalse(a, mdWithLinks)
+// validateTrue(b)
+// .then((res) => console.log(res))

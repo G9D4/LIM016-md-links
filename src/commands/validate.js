@@ -2,8 +2,7 @@ const axios = require ('axios')
 
 //Validate true
 const validateTrue = (basicInfoArray) => {
-    const httpRequest = basicInfoArray.map((link) => {
-        const axiosSearch = axios.get(link.href)
+    const httpRequest = basicInfoArray.map((link) => axios.get(link.href)
         .then((res) => {
             return {
             href: link.href,
@@ -20,10 +19,8 @@ const validateTrue = (basicInfoArray) => {
             status: "Failed request",
             ok: "Unknown"
         }})
-        return axiosSearch
-    })
+    )
     return Promise.allSettled(httpRequest)
-    .then(res => res)
 }
 
 module.exports = {

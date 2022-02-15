@@ -1,10 +1,40 @@
+const fakePath = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/pruebitas'
+const emptyFolder = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/vacio'
+const txtFile = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/archivo-no-md/prueba.txt'
+const mdNoLinks = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/md-sin-links/prueba.md'
+const mdWithLinks = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/md-con-links/prueba.md'
+const recursiveSearch = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/prueba-recursiva'
 
 
 
-
-
-
-
+//Validate true
+const validateTrue = (basicInfoArray) => {
+    const httpRequest = basicInfoArray.map((link) => {
+        const axiosSearch = axios.get(link.href)
+        .then((res) => {
+            return {
+            href: link.href,
+            text: link.text,
+            file: link.file,
+            status: res.status,
+            ok: res.status>=200 && res.status<300? "OK" : "FAIL" 
+        }})
+        .catch(() => {
+            return {
+            href: link.href,
+            text: link.text,
+            file: link.file,
+            status: "Failed request",
+            ok: "Unknown"
+        }})
+        return axiosSearch
+    })
+    // console.log(httpRequest)
+    return Promise.allSettled(httpRequest)
+    // .then(res => res)
+    .then(res => console.log(res))
+    // .catch(error => console.log(error))
+}
 
 //Verificar y recopilar links si los hay
 const getLinksAndInfo = (filePath) => {
@@ -20,31 +50,4 @@ const getLinksAndInfo = (filePath) => {
             file: filePath
         }
     })
-}
-
-
-
-
-const validateTrue = (links, path) => {
-    const basicInfoArray = validateFalse(links, path)
-    return Promise.allSettled(basicInfoArray.map(link => {
-        const request = axios.get(link.href)
-            .then((res) => ({
-                href: link.href,
-                text: link.text,
-                file: link.file,
-                status: res.status,
-                ok: res.status>=200 && res.status<300? "OK" : "FAIL"
-            }))
-            .catch(() => ({
-                href: link.href,
-                text: link.text,
-                file: link.file,
-                status: "Failed request",
-                ok: "Unknown"
-                
-            }))
-        return request
-    }))
-    .then(res => res)    
 }
