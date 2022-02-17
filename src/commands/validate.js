@@ -1,5 +1,29 @@
 const axios = require ('axios')
 
+// //Validate true
+// const validateTrue = (basicInfoArray) => {
+//     const httpRequest = basicInfoArray.map((link) => axios.get(link.href)
+//         .then((res) => {
+//             return {
+//             href: link.href,
+//             text: link.text,
+//             file: link.file,
+//             status: res.status,
+//             ok: res.status>=200 && res.status<300? "OK" : "FAIL" 
+//         }})
+//         .catch(() => {
+//             return {
+//             href: link.href,
+//             text: link.text,
+//             file: link.file,
+//             status: "Failed request",
+//             ok: "Unknown"
+//         }})
+//     )
+//     return Promise.allSettled(httpRequest)
+//     .then((res) => console.log(res))
+// }
+
 //Validate true
 const validateTrue = (basicInfoArray) => {
     const httpRequest = basicInfoArray.map((link) => axios.get(link.href)
@@ -9,19 +33,20 @@ const validateTrue = (basicInfoArray) => {
             text: link.text,
             file: link.file,
             status: res.status,
-            ok: res.status>=200 && res.status<300? "OK" : "FAIL" 
+            ok: res.status>=200 && res.status<300 ? "OK" : "FAIL" 
         }})
-        .catch(() => {
+        .catch((err) => {
             return {
             href: link.href,
             text: link.text,
             file: link.file,
-            status: "Failed request",
-            ok: "Unknown"
+            status: err.response ? err.response.status : "Failed request",
+            ok: "FAIL"
         }})
     )
     return Promise.allSettled(httpRequest)
-    .then((res) => console.log(res))
+    // .then(res => console.log(res))
+    // .catch(err => console.log(err))
 }
 
 module.exports = {
