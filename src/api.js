@@ -1,7 +1,7 @@
 const path = require ('path')
 const fs = require ('fs')
 
-const regexBackSlash = /\\/g
+// const regexBackSlash = /\\/g
 const regexLinkNotation = /^\[([\w\s\d]+)\]\((https?:\/\/[\w\d.\/?=#]+)\)$/gm
 const regexUrl = /\(https?:\/\/[\w\d.\/?=#]+\)/gm
 const regexText = /\[[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?\s]*\]/gm
@@ -21,10 +21,10 @@ const recursiveSearch = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-l
 //     return filePath
 // }
 
-//Verificamos si la ruta es absoluta
-const isAbsolute = (enteredPath) => {
-    return path.isAbsolute(enteredPath)
-}
+// //Verificamos si la ruta es absoluta
+// const isAbsolute = (enteredPath) => {
+//     return path.isAbsolute(enteredPath)
+// }
 
 //Convertimos la ruta relativa a absoluta
 const toAbsolute = (enteredPath) => {
@@ -32,9 +32,8 @@ const toAbsolute = (enteredPath) => {
 }
 
 //Verificamos si la ruta existe 
-//(por que cuando no existe da undefined al final?)
-const isRealPath = (enteredPath) => {
-    return fs.existsSync(enteredPath)
+const isRealPath = (absolutePath) => {
+    return fs.existsSync(absolutePath)
 }
 
 //Verificamos si es un file .md
@@ -44,33 +43,29 @@ const isMdFile = (filePath) => {
 
 //Verificamos si es un directorio
 const isDirectory = (enteredPath) => {
-        return fs.statSync(enteredPath).isDirectory()
+    return fs.statSync(enteredPath).isDirectory()
 }
 
 //Verificamos el contenido del directorio
 const directoryContent = (dirPath) => {
-    // if(fs.readdirSync(dirPath).length === 0){
-    //     return false
-    // }else{
-    //     return true
-    // }
     return fs.readdirSync(dirPath)
 }
 
 //Verificamos el contenido del file
-
 const fileContent = (filePath) => {
     return fs.readFileSync(filePath, 'utf-8')
 }
 
 //Recopilamos los archivos .md, si el path es de un directorio, lo exploramos aplicando recursividad
-const getMdFiles = (enteredPath) => {
+const getMdFilesWithLinks = (enteredPath) => {
     let fileArray=[]
 
     const recursiveSearch = (enteredPath) => {
         if(!isDirectory(enteredPath)){
             if(isMdFile(enteredPath)){
-                fileArray.push(enteredPath)
+                if(fileContent(enteredPath).match(regexLinkNotation)){
+                    fileArray.push(enteredPath)
+                }
             }
         }else{
             let filesList = directoryContent(enteredPath)
@@ -85,67 +80,67 @@ const getMdFiles = (enteredPath) => {
 }
 
 //Recopilar links si los hay
-const getLinks = (filePath) => {
-    const linksArray = fileContent(filePath).match(regexLinkNotation)
+const getLinks = (mdPathArray) => {
+    let linksArray = []
 
-    if(linksArray === null){
-        return false
-    }
+    mdPathArray.forEach((file) => {
+        const fullLinks = fileContent(file).match(regexLinkNotation)
+        fullLinks.map((fullLink) => {
+            const href = fullLink.match(regexUrl).join().slice(1, -1)
+            const text = fullLink.match(regexText).join().slice(1, -1)
+            linksArray.push({
+                href: href,
+                text: text,
+                file: file
+            })
+        })
+    })
     return linksArray
 }
 
-//Validate false
-const validateFalse = (links, path) => { 
-    return links.map((mdLink) => {
-        const href = mdLink.match(regexUrl).join().slice(1, -1)
-        const text = mdLink.match(regexText).join().slice(1, -1)
-        return {
-            href: href,
-            text: text,
-            file: path
-        }
-    })
+const axios = require ('axios')
+
+//Validate true
+const validateTrue = (basicInfoArray) => {
+    const httpRequest = basicInfoArray.map((link) => axios.get(link.href)
+        .then((res) => {
+            return {
+            href: link.href,
+            text: link.text,
+            file: link.file,
+            status: res.status,
+            ok: res.status>=200 && res.status<300 ? "OK" : "FAIL" 
+        }})
+        .catch((err) => {
+            return {
+            href: link.href,
+            text: link.text,
+            file: link.file,
+            status: err.response ? err.response.status : "Failed request",
+            ok: "FAIL"
+        }})
+    )
+    return Promise.allSettled(httpRequest)
+    .then((res) => console.log(res))
 }
 
-// const axios = require ('axios')
-
-// //Validate true
-// const validateTrue = (basicInfoArray) => {
-//     const httpRequest = basicInfoArray.map((link) => axios.get(link.href)
-//         .then((res) => {
-//             return {
-//             href: link.href,
-//             text: link.text,
-//             file: link.file,
-//             status: res.status,
-//             ok: res.status>=200 && res.status<300? "OK" : "FAIL" 
-//         }})
-//         .catch(() => {
-//             return {
-//             href: link.href,
-//             text: link.text,
-//             file: link.file,
-//             status: "Failed request",
-//             ok: "Unknown"
-//         }})
-//     )
-//     return Promise.allSettled(httpRequest)
-// }
 
 module.exports = {
-    isAbsolute,
     toAbsolute,
     isRealPath,
     isMdFile,
     isDirectory,
     directoryContent,
     fileContent,
-    getMdFiles,
-    getLinks,
-    validateFalse
+    getMdFilesWithLinks,
+    getLinks
 }
 
-// let a = getLinks(mdWithLinks)
-// let b = validateFalse(a, mdWithLinks)
-// validateTrue(b)
-// .then((res) => console.log(res))
+let a = toAbsolute(recursiveSearch)
+let b = isRealPath(recursiveSearch)
+let c = getMdFilesWithLinks(recursiveSearch)
+// console.log(c)
+let d = getLinks(c)
+// console.log(d)
+console.log(validateTrue(d))
+

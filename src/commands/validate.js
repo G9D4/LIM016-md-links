@@ -21,6 +21,7 @@ const validateTrue = (basicInfoArray) => {
         }})
     )
     return Promise.allSettled(httpRequest)
+    .then((res) => console.log(res))
 }
 
 module.exports = {
