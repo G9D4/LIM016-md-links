@@ -15,8 +15,8 @@ const mdLinks = (path, options) => {
         if(basic.isRealPath(absolutePath) === false){
             reject (`La ruta ${absolutePath} no existe`)
         }else{
-            const mdFiles = basic.getMdFiles(absolutePath)
-            if(mdFiles === []){
+            const mdFiles = basic.getMdFilesWithLinks(absolutePath)
+            if(mdFiles.length === 0){
                 reject (`No hay archivos .md`)
             }else{     
                 const mdUrls = mdFiles.map(e => basic.getLinks(e))

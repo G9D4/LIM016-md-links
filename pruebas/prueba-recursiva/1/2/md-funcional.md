@@ -8,5 +8,4 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 
 [Link no funcional 404](https://nodejs.org/en/hello)
 
-
 [Link no funcional 301](https://superpet.pe/412-cyber)

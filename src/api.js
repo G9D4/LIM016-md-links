@@ -98,31 +98,31 @@ const getLinks = (mdPathArray) => {
     return linksArray
 }
 
-const axios = require ('axios')
+// const axios = require ('axios')
 
-//Validate true
-const validateTrue = (basicInfoArray) => {
-    const httpRequest = basicInfoArray.map((link) => axios.get(link.href)
-        .then((res) => {
-            return {
-            href: link.href,
-            text: link.text,
-            file: link.file,
-            status: res.status,
-            ok: res.status>=200 && res.status<300 ? "OK" : "FAIL" 
-        }})
-        .catch((err) => {
-            return {
-            href: link.href,
-            text: link.text,
-            file: link.file,
-            status: err.response ? err.response.status : "Failed request",
-            ok: "FAIL"
-        }})
-    )
-    return Promise.allSettled(httpRequest)
-    .then((res) => console.log(res))
-}
+// //Validate true
+// const validateTrue = (basicInfoArray) => {
+//     const httpRequest = basicInfoArray.map((link) => axios.get(link.href)
+//         .then((res) => {
+//             return {
+//             href: link.href,
+//             text: link.text,
+//             file: link.file,
+//             status: res.status,
+//             ok: res.status>=200 && res.status<300 ? "OK" : "FAIL" 
+//         }})
+//         .catch((err) => {
+//             return {
+//             href: link.href,
+//             text: link.text,
+//             file: link.file,
+//             status: err.response ? err.response.status : "Failed request",
+//             ok: "FAIL"
+//         }})
+//     )
+//     return Promise.allSettled(httpRequest)
+//     .then((res) => console.log(res))
+// }
 
 
 module.exports = {
@@ -136,11 +136,12 @@ module.exports = {
     getLinks
 }
 
-let a = toAbsolute(recursiveSearch)
-let b = isRealPath(recursiveSearch)
-let c = getMdFilesWithLinks(recursiveSearch)
-// console.log(c)
-let d = getLinks(c)
+// let a = toAbsolute(emptyFolder)
+// let b = isRealPath(emptyFolder)
+// let c = getMdFilesWithLinks(emptyFolder)
+// // console.log(c)
+// let d = getLinks(c)
 // console.log(d)
-console.log(validateTrue(d))
+// console.log(d.length === 0)
+// // console.log(validateTrue(d))
 
