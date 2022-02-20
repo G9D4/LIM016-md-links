@@ -6,7 +6,7 @@ const validateTrue = (basicInfoArray) => {
         .then((res) => {
             return {
             href: link.href,
-            text: link.text,
+            text: link.text.substring(0, 50),
             file: link.file,
             status: res.status,
             ok: res.status>=200 && res.status<300 ? "OK" : "FAIL" 
@@ -14,7 +14,7 @@ const validateTrue = (basicInfoArray) => {
         .catch((err) => {
             return {
             href: link.href,
-            text: link.text,
+            text: link.text.substring(0, 50),
             file: link.file,
             status: err.response ? err.response.status : "Failed request",
             ok: "FAIL"

@@ -89,7 +89,7 @@ const getLinks = (mdPathArray) => {
             const text = fullLink.match(regexText).join().slice(1, -1)
             linksArray.push({
                 href: href,
-                text: text,
+                text: text.substring(0, 50),
                 file: file
             })
         })
