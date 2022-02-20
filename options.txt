@@ -1,0 +1,18 @@
+.options({
+        validate: {
+            name: 'validate',
+            alias: 'v',
+            default: false,
+            type: 'boolean',
+            describe: 'validates the links\' statuses'
+        }
+    },
+    {
+        stats: {
+            name: 'stats',
+            alias: 's',
+            // default: false,
+            type: 'boolean',
+            describe: 'retrieves statistics about the array of links'
+        }
+    })

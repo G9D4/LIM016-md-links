@@ -79,7 +79,7 @@ const getMdFilesWithLinks = (enteredPath) => {
     return fileArray
 }
 
-//Recopilar links si los hay
+//Recopilar links si los hay y retornar su informacion basica
 const getLinks = (mdPathArray) => {
     let linksArray = []
 
