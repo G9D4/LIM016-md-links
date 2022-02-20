@@ -11,9 +11,7 @@ const uniqueStat = (array) => {
 }
 
 const brokenStat = (array) => {
-    // console.log(array)
     const broken = array.filter((link) => link.ok === 'FAIL')
-    // console.log(broken)
     const message = `Broken: ${broken.length}`
     return `${message}`
 }

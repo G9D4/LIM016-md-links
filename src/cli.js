@@ -22,7 +22,7 @@ const argv = require ('yargs')
         type: 'boolean',
         describe: 'retrieves statistics about the array of links'
     })
-    // .strictOptions(true)
+    .strictOptions(true)
     .showHelpOnFail(false, 'Oops, you need --help?')
     .help('h')
     .alias('h', 'help')
