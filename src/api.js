@@ -116,4 +116,4 @@ module.exports = {
 // let d = getLinks(c)
 // console.log(d)
 // console.log(d.length === 0)
-// // console.log(validateTrue(d))
+// // console.log(validateTrue(d))()

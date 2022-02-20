@@ -1,6 +1,6 @@
-const basic = require ('./api')
-const validate = require ('./commands/validate')
-const stats = require ('./commands/stats')
+const basic = require ('../api')
+const validate = require ('./validate')
+const stats = require ('./stats')
 
 const fakePath = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/pruebitas'
 const emptyFolder = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/vacio'
@@ -34,3 +34,5 @@ const mdLinks = (path, options) => new Promise((res, rej) => {
 // mdLinks(recursiveSearch, {validate: true})
 // .then(res => console.log(res))
 // .catch(rej => console.log(rej))
+
+module.exports = { mdLinks }
