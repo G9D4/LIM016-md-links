@@ -1,9 +1,16 @@
 {
-  "name": "md-links",
+  "name": "g9d4-md-links",
   "version": "0.1.0",
+  "description": "CLI tool to check links in .md files",
+  "main": "cli.js",
+  "keywords": ["cli", "md links", "node.js", "markdown", "G9D4"],
+  "author": "G9D4",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.25.0",
-    "node-fetch": "^3.2.0",
     "yargs": "^17.3.1"
+  },
+  "bin": {
+    "md-links": "./src/cli.js"
   }
 }
