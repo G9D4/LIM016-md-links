@@ -11,8 +11,10 @@ const uniqueStat = (array) => {
 }
 
 const brokenStat = (array) => {
-    const broken = array.filter((link) => link.ok === "FAIL")
-    const message = `Broken: ${broken.lenght}`
+    // console.log(array)
+    const broken = array.filter((link) => link.ok === 'FAIL')
+    // console.log(broken)
+    const message = `Broken: ${broken.length}`
     return `${message}`
 }
 
@@ -21,20 +23,3 @@ module.exports = {
     uniqueStat,
     brokenStat
 }
-
-// console.log(uniqueStat([
-//     {
-//       href: 'https://nodejs.org/en/',
-//       text: 'Link funcional',
-//       file: 'C:\\Users\\gabri\\Desktop\\laboratoria-md-links\\LIM016-md-links\\pruebas\\md-con-links\\prueba.md',
-//       status: 200,
-//       ok: 'OK'
-//     },
-//     {
-//       href: 'https://nodejs.org/en/hello',    
-//       text: 'Link no funcional',
-//       file: 'C:\\Users\\gabri\\Desktop\\laboratoria-md-links\\LIM016-md-links\\pruebas\\md-con-links\\prueba.md',
-//       status: 404,
-//       ok: 'FAIL'
-//     }
-//   ]))

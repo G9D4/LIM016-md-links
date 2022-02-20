@@ -2,10 +2,8 @@
 
 const mdl = require('./commands/index')
 const stats = require ('./commands/stats')
-// const yargs = require ('yargs')
+const argv = require ('yargs')
 
-const argv = require ('yargs/yargs')(process.argv.slice(2))
-    // yargs
     .usage('Usage: md-links <path> [options]')
     .example("md-links your/path --validate --stats", "returns both values plus broken links")
     .option(
@@ -20,10 +18,11 @@ const argv = require ('yargs/yargs')(process.argv.slice(2))
         'stats', {
         name: 'stats',
         alias: 's',
+        default: false,
         type: 'boolean',
         describe: 'retrieves statistics about the array of links'
     })
-    .strictOptions(true)
+    // .strictOptions(true)
     .showHelpOnFail(false, 'Oops, you need --help?')
     .help('h')
     .alias('h', 'help')
@@ -33,6 +32,15 @@ let path = argv._
 
 if (path.length > 1 || path.length === 0){
     console.log('Input 1 path please')
+}else if(argv.stats && argv.validate){
+    mdl.mdLinks(path.toString(), {validate: true})
+        .then((res) => {
+            const total = stats.totalStat(res)
+            const unique = stats.uniqueStat(res)
+            const broken = stats.brokenStat(res)
+            console.log(res, total, unique, broken)
+        })
+        .catch((err) => console.log(err))
 } else if(argv.validate){
     mdl.mdLinks(path.toString(), {validate: true})
         .then((res) => console.log(res))
@@ -43,15 +51,6 @@ if (path.length > 1 || path.length === 0){
             const total = stats.totalStat(res)
             const unique = stats.uniqueStat(res)
             console.log(total, unique)
-        })
-        .catch((err) => console.log(err))
-}else if(argv.stats && argv.validate){
-    mdl.mdLinks(path.toString(), {validate: true})
-        .then((res) => {
-            const total = stats.totalStat(res)
-            const unique = stats.uniqueStat(res)
-            const broken = stats.brokenStat(res)
-            console.log(res, total, unique, broken)
         })
         .catch((err) => console.log(err))
 }else{

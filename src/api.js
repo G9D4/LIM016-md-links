@@ -14,7 +14,6 @@ const mdNoLinks = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/p
 const mdWithLinks = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/md-con-links/prueba.md'
 const recursiveSearch = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/prueba-recursiva'
 
-
 //Le damos formato a la ruta
 // const renderPath = (enteredPath) => {
 //     const filePath = enteredPath.replace(/\\/g, "/")
