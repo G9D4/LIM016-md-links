@@ -2,9 +2,9 @@ const path = require ('path')
 const fs = require ('fs')
 
 // const regexBackSlash = /\\/g
-const regexLinkNotation = /^\[([\w\s\d]+)\]\((https?:\/\/[\w\d.\/?=#]+)\)$/gm
-const regexUrl = /\(https?:\/\/[\w\d.\/?=#]+\)/gm
-const regexText = /\[[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?\s]*\]/gm
+const regexLinkNotation = /^\[.*\]\(.*\)$/gm
+const regexUrl = /\(.*\)/gm
+const regexText = /\[.*\]/gm
 
 
 const fakePath = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/pruebitas'
@@ -94,6 +94,7 @@ const getLinks = (mdPathArray) => {
             })
         })
     })
+    // console.log(linksArray)
     return linksArray
 }
 
