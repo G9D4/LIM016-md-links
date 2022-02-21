@@ -94,7 +94,6 @@ const getLinks = (mdPathArray) => {
             })
         })
     })
-    // console.log(linksArray)
     return linksArray
 }
 

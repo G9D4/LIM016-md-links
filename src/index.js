@@ -1,6 +1,6 @@
-const basic = require ('../api')
-const validate = require ('./validate')
-const stats = require ('./stats')
+const basic = require ('./api')
+const validate = require ('./commands/validate')
+const stats = require ('./commands/stats')
 
 const fakePath = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/pruebitas'
 const emptyFolder = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/vacio'

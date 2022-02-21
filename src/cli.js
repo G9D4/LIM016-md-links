@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-const mdl = require('./commands/index')
+const mdl = require('./index')
 const stats = require ('./commands/stats')
 const argv = require ('yargs')
 
