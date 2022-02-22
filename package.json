@@ -16,6 +16,10 @@
     "axios": "^0.25.0",
     "yargs": "^17.3.1"
   },
+  "scripts": {
+    "test": "jest --coverage --verbose",
+    "lint": "eslint . --ext .js"
+  },
   "bin": {
     "md-links": "./src/cli.js"
   },
