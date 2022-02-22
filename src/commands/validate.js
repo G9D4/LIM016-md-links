@@ -1,4 +1,5 @@
 const axios = require ('axios')
+const {getBasic} = require('../../test/infoTest')
 
 //Validate true
 const validateTrue = (basicInfoArray) => {
@@ -21,6 +22,7 @@ const validateTrue = (basicInfoArray) => {
         }})
     )
     return Promise.allSettled(httpRequest)
+    // .then((res) => res.map((prom) => prom.value ? prom.value : prom))
 }
 
 module.exports = {

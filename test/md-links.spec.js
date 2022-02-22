@@ -3,7 +3,7 @@ const stats = require ('../src/commands/stats')
 const validate = require ('../src/commands/validate')
 const mdLinks = require ('../src/index')
 
-const {relPath, absPath, dirPath, dirContent, fileContent, filePath, mdLinkArray, recursivePath} = require ('./infoTest')
+const {relPath, absPath, dirPath, dirContent, fileContent, filePath, mdLinkArray, recursivePath, getBasic, arrayStatus} = require ('./infoTest')
 
 describe('api', () => {
 
@@ -51,15 +51,15 @@ describe('api', () => {
 
   describe('getLinks', () => {
     it('obtiene los links y su informacion basica', () => {
-      expect(api.getLinks()).toBe()
+      expect(api.getLinks(mdLinkArray)).toEqual(getBasic)
     })
   })
 })
 
-// describe('mdLinks', () => {
+describe('validate', () => {
 
-//   it('should...', () => {
-//     console.log('FIX ME!');
-//   });
+    it('obtiene el total de links del array', () => {
+      return expect(validate.validateTrue(getBasic)).resolves.toEqual(arrayStatus)
+    })
 
-// });
+})

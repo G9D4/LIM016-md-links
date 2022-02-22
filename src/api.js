@@ -117,4 +117,5 @@ module.exports = {
 // console.log(d.length === 0)
 // // console.log(validateTrue(d))()
 
-console.log('asdasdasd',getMdFilesWithLinks('C:\\Users\\gabri\\Desktop\\laboratoria-md-links\\LIM016-md-links\\pruebas\\prueba-recursiva'))
+// const h = getMdFilesWithLinks('C:\\Users\\gabri\\Desktop\\laboratoria-md-links\\LIM016-md-links\\pruebas\\prueba-recursiva')
+// console.log(getLinks(h))
