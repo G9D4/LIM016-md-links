@@ -1,7 +1,9 @@
 #! /usr/bin/env node
 
+// const api = require('./api')
 const mdl = require('./index')
 const stats = require ('./commands/stats')
+const chalk = require('chalk');
 const argv = require ('yargs')
 
     .usage('Usage: md-links <path> [options]')
@@ -31,14 +33,17 @@ const argv = require ('yargs')
 let path = argv._
 
 if (path.length > 1 || path.length === 0){
-    console.log('Input 1 path please')
+    console.log(chalk.bgRedBright('Enter 1 path please'))
 }else if(argv.stats && argv.validate){
     mdl.mdLinks(path.toString(), {validate: true})
         .then((res) => {
             const total = stats.totalStat(res)
             const unique = stats.uniqueStat(res)
             const broken = stats.brokenStat(res)
-            console.log(res, total, unique, broken)
+            console.log(res) 
+            console.log(total)
+            console.log(chalk.yellowBright(unique)) 
+            console.log(chalk.redBright(broken))
         })
         .catch((err) => console.log(err))
 } else if(argv.validate){
@@ -50,7 +55,8 @@ if (path.length > 1 || path.length === 0){
         .then((res) => {
             const total = stats.totalStat(res)
             const unique = stats.uniqueStat(res)
-            console.log(total, unique)
+            console.log(total)
+            console.log(chalk.yellowBright(unique))
         })
         .catch((err) => console.log(err))
 }else{

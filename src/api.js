@@ -1,5 +1,6 @@
 const path = require ('path')
 const fs = require ('fs')
+const chalk = require('chalk');
 
 // const regexBackSlash = /\\/g
 const regexLinkNotation = /^\[.*\]\(.*\)$/gm
@@ -97,6 +98,33 @@ const getLinks = (mdPathArray) => {
     return linksArray
 }
 
+//Renderizar los resultados completos
+// const toRenderFull = (res) => {
+//     res.map((r) => {
+//         let stat
+//         if(r.ok === 'OK'){
+//             stat = chalk.green(r.ok)
+//         }else{
+//             stat = chalk.red(r.ok)
+//         }
+//         console.log(
+//             chalk.white('Status: ',r.status),
+//             '\n',
+//             chalk.white('Ok:'),(stat)
+//         )
+//     })
+// }
+
+// const toRender = (res) => {
+//     res.map((r) => {
+//         console.log(
+//             chalk.white('Href: ',r.href),
+//             chalk.white('Text: ',r.text),
+//             chalk.white('File: ',r.file)
+//         )
+//     })
+// }
+
 
 module.exports = {
     toAbsolute,
@@ -106,7 +134,9 @@ module.exports = {
     directoryContent,
     fileContent,
     getMdFilesWithLinks,
-    getLinks
+    getLinks,
+    // toRender,
+    // toRenderFull
 }
 
 

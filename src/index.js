@@ -1,6 +1,7 @@
 const basic = require ('./api')
 const validate = require ('./commands/validate')
 const stats = require ('./commands/stats')
+const chalk = require('chalk');
 
 const fakePath = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/pruebitas'
 const emptyFolder = 'C:/Users/gabri/Desktop/laboratoria-md-links/LIM016-md-links/pruebas/vacio'
@@ -13,18 +14,18 @@ const mdLinks = (path, options) => new Promise((res, rej) => {
 
     const absolutePath = basic.toAbsolute(path)
     if(basic.isRealPath(absolutePath) === false){
-        rej (`La ruta ${absolutePath} no existe`)
+        rej (chalk.bgRedBright(`Path doesn't exists`))
     }else{
         const mdFiles = basic.getMdFilesWithLinks(absolutePath)
         if(mdFiles.length === 0){
-            rej (`No hay archivos .md con links`)
+            rej (chalk.bgRedBright(`No .md files with links`))
         }else{     
             const mdUrls = basic.getLinks(mdFiles)                
             if (options.validate === true) {
                 const fullInfo = validate.validateTrue(mdUrls)
                 res (fullInfo)
             }else{
-                res (mdUrls)
+                res (chalk.red(mdUrls))
             }
         }
     }  
