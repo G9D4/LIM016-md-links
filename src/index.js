@@ -25,7 +25,7 @@ const mdLinks = (path, options) => new Promise((res, rej) => {
                 const fullInfo = validate.validateTrue(mdUrls)
                 res (fullInfo)
             }else{
-                res (chalk.red(mdUrls))
+                res (mdUrls)
             }
         }
     }  

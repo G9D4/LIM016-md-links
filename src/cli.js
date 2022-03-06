@@ -42,8 +42,8 @@ if (path.length > 1 || path.length === 0){
             const broken = stats.brokenStat(res)
             console.log(res) 
             console.log(total)
-            console.log(chalk.yellowBright(unique)) 
-            console.log(chalk.redBright(broken))
+            console.log(unique)
+            console.log(broken)
         })
         .catch((err) => console.log(err))
 } else if(argv.validate){
@@ -56,7 +56,7 @@ if (path.length > 1 || path.length === 0){
             const total = stats.totalStat(res)
             const unique = stats.uniqueStat(res)
             console.log(total)
-            console.log(chalk.yellowBright(unique))
+            console.log(unique)
         })
         .catch((err) => console.log(err))
 }else{
