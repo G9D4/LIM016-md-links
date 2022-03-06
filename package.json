@@ -1,6 +1,6 @@
 {
   "name": "g9d4-md-links",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CLI tool to check links in .md files",
   "main": "cli.js",
   "keywords": [
