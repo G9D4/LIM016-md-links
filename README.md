@@ -6,7 +6,7 @@
 * [2. Instalación](#2-instalación)
 * [3. Guía de uso](#3-guía-de-uso)
 * [4. Ejemplos de uso](#4-ejemplos-de-uso)
-* [5. Diagramas de flujo](#5-diagramas-de-flujo)
+* [5. Diagrama de flujo](#5-diagrama-de-flujo)
 * [6. Dependencias](#6-dependencias)
 
 ***
@@ -105,9 +105,9 @@ Si la ruta no existe
 Si la ruta no contiene archivos md
 
 
-## 5. Diagramas de flujo
+## 5. Diagrama de flujo
 
-
+![Diagrama](https://github.com/G9D4/LIM016-md-links/blob/main/diagramas/diagramaAPI.drawio.pdf)
 
 ## 6. Entregables
 
